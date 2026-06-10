@@ -28,9 +28,7 @@ $mysqli = new mysqli("localhost", "root", "", "islandia");
           <?php
           $result = $mysqli->query("SELECT nazwa FROM `obiekty` WHERE panstwo = 'Islandia' AND idRodzaj = 10;");
           while($row = $result->fetch_assoc()) {
-            echo("<li>
-              {$row['nazwa']}
-            </li>");
+            echo("<li>{$row['nazwa']}</li>");
           }
           ?>
         </ol>
@@ -43,9 +41,7 @@ $mysqli = new mysqli("localhost", "root", "", "islandia");
           <?php
           $result = $mysqli->query("SELECT nazwa FROM `obiekty` WHERE panstwo = 'Islandia' AND idRodzaj = 14;");
           while($row = $result->fetch_assoc()) {
-            echo("<li>
-              {$row['nazwa']}
-            </li>");
+            echo("<li>{$row['nazwa']}</li>");
           }
           ?>
         </ol>
@@ -60,9 +56,7 @@ $mysqli = new mysqli("localhost", "root", "", "islandia");
         <?php
         $result = $mysqli->query("SELECT idObiekt, plik, nazwa FROM `obiekty` WHERE panstwo = 'Islandia';");
         while($row = $result->fetch_assoc()) {
-          echo("<a href='obiekty.php?idObiekt={$row['idObiekt']}'>
-            <img src='{$row['plik']}' alt='{$row['nazwa']}' title='{$row['nazwa']}' class='miniatury'>
-          </a>");
+          echo("<a href='obiekty.php?idObiekt={$row['idObiekt']}'><img src='{$row['plik']}' alt='{$row['nazwa']}' title='{$row['nazwa']}' class='miniatury'></a>");
         }
         ?>
     </section>

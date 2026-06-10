@@ -28,9 +28,7 @@ $mysqli = new mysqli("localhost", "root", "", "islandia");
           <?php
           $result = $mysqli->query("SELECT nazwa FROM `obiekty` WHERE panstwo = 'Islandia' AND idRodzaj = 10;");
           while($row = $result->fetch_assoc()) {
-            echo("<li>
-              {$row['nazwa']}
-            </li>");
+            echo("<li>{$row['nazwa']}</li>");
           }
           ?>
         </ol>
@@ -43,9 +41,7 @@ $mysqli = new mysqli("localhost", "root", "", "islandia");
          <?php
           $result = $mysqli->query("SELECT nazwa FROM `obiekty` WHERE panstwo = 'Islandia' AND idRodzaj = 14;");
           while($row = $result->fetch_assoc()) {
-            echo("<li>
-              {$row['nazwa']}
-            </li>");
+            echo("<li>{$row['nazwa']}</li>");
           }
           ?>
         </ol>
@@ -64,14 +60,7 @@ $mysqli = new mysqli("localhost", "root", "", "islandia");
 
         $result = $statement->get_result();
         while($row = $result->fetch_assoc()) {
-          echo("
-            <img src='{$row['plik']}' alt='{$row['nazwa']}'>
-
-            <h2>{$row['nazwa']}</h2>
-            <h3>{$row['rodzaj']}</h3>
-            <p>{$row['nazwaCechy']}: {$row['wartoscCechy']}</p>
-            <p>{$row['opis']}</p>
-          ");
+          echo("<img src='{$row['plik']}' alt='{$row['nazwa']}'><h2>{$row['nazwa']}</h2><h3>{$row['rodzaj']}</h3><p>{$row['nazwaCechy']}: {$row['wartoscCechy']}</p><p>{$row['opis']}</p>");
         }
         ?>
     </section>
