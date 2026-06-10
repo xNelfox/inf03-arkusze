@@ -59,13 +59,13 @@ $mysqli = new mysqli("localhost", "root", "", "islandia");
         $statement->execute();
 
         $result = $statement->get_result();
-        while($row = $result->fetch_assoc()) {
-          echo("<img src='{$row['plik']}' alt='{$row['nazwa']}'>");
-          echo("<h2>{$row['nazwa']}</h2>");
-          echo("<h3>{$row['rodzaj']}</h3>");
-          echo("<p>{$row['nazwaCechy']}: {$row['wartoscCechy']}</p>");
-          echo("<p>{$row['opis']}</p>");
-        }
+        $row = $result->fetch_assoc();
+
+        echo("<img src='{$row['plik']}' alt='{$row['nazwa']}'>");
+        echo("<h2>{$row['nazwa']}</h2>");
+        echo("<h3>{$row['rodzaj']}</h3>");
+        echo("<p>{$row['nazwaCechy']}: {$row['wartoscCechy']}</p>");
+        echo("<p>{$row['opis']}</p>");
         ?>
     </section>
   </main>

@@ -1,5 +1,5 @@
 <?php
-// $mysqli = new mysqli("localhost", "root", "", "wodospady");
+$mysqli = new mysqli("localhost", "root", "", "wodospady");
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +17,12 @@
 
   <main>
     <aside>
-      <!--1-->
+      <?php
+      $result = $mysqli->query("SELECT idKontynentu, nazwa FROM kontynenty;");
+      while($row = $result->fetch_assoc()) {
+        echo("<a href='index.php?id={$row['idKontynentu']}'>{$row['nazwa']}</a>");
+      }
+      ?>
     </aside>
 
     <section>
@@ -29,7 +34,27 @@
           <td>Wysokość</td>
         </tr>
 
-        <!--2-->
+        <?php
+        $id = 6;
+
+        if(isset($_GET["id"])) {
+          $id = $_GET["id"];
+        }
+
+        $statement = $mysqli->prepare("SELECT id, panstwo, nazwa, wysokosc FROM wodospady WHERE idKontynentu = ?");
+        $statement->bind_param("s", $id);
+        $statement->execute();
+
+        $result = $statement->get_result();
+        while($row = $result->fetch_assoc()) {
+          echo("<tr>");
+          echo("<td>{$row['id']}</td>");
+          echo("<td>{$row['panstwo']}</td>");
+          echo("<td>{$row['nazwa']}</td>");
+          echo("<td>{$row['wysokosc']}</td>");
+          echo("</tr>");
+        }
+        ?>
       </table>
 
       <h4>Wpisz osiągnięcie do bazy</h4>
@@ -39,11 +64,24 @@
 
         <label for="turist">Turysta</label>
         <select id="turist" name="turist">
-          <!--3-->
+          <?php
+          $result = $mysqli->query("SELECT idTurysta, nick FROM turysci");
+          while($row = $result->fetch_assoc()) {
+            echo("<option value='{$row['idTurysta']}'>{$row['nick']}</option>");
+          }
+          ?>
         </select>
 
-        <button>Wpisz</button>
+        <button name="submit">Wpisz</button>
       </form>
+
+      <?php
+      if(isset($_POST["submit"])) {
+        $statement = $mysqli->prepare("INSERT INTO osiagniecia VALUES(NULL, ?, ?)");
+        $statement->bind_param("ss", $_POST["id"], $_POST["turist"]);
+        $statement->execute();
+      }
+      ?>
     </section>
   </main>
 
@@ -63,5 +101,5 @@
 </html>
 
 <?php
-// $mysqli->close();
+$mysqli->close();
 ?>
