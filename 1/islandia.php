@@ -56,7 +56,9 @@ $mysqli = new mysqli("localhost", "root", "", "islandia");
         <?php
         $result = $mysqli->query("SELECT idObiekt, plik, nazwa FROM `obiekty` WHERE panstwo = 'Islandia';");
         while($row = $result->fetch_assoc()) {
-          echo("<a href='obiekty.php?idObiekt={$row['idObiekt']}'><img src='{$row['plik']}' alt='{$row['nazwa']}' title='{$row['nazwa']}' class='miniatury'></a>");
+          echo("<a href='obiekty.php?idObiekt={$row['idObiekt']}'>");
+          echo("<img src='{$row['plik']}' alt='{$row['nazwa']}' title='{$row['nazwa']}' class='miniatury'>");
+          echo("</a>");
         }
         ?>
     </section>
